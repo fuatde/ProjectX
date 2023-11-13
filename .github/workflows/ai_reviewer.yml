@@ -1,0 +1,39 @@
+name: ChatGPT Action
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  ai_reviewer_job:
+    runs-on: ubuntu-latest
+    name: ChatGPT Action
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          ref: ${{github.event.pull_request.head.ref}}
+          submodules: false
+
+      - uses: plachintas/chatgpt-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        with:
+          debug: true
+          action: score
+          model: 'gpt-3.5-turbo-16k'
+
+      - uses: plachintas/chatgpt-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        with:
+          debug: true
+          action: review
+          model: 'gpt-3.5-turbo-16k'
+          # review_comment_lgtm: true
