@@ -36,4 +36,4 @@ jobs:
           debug: true
           action: review
           model: 'gpt-3.5-turbo-16k'
-          # review_comment_lgtm: true
+          review_comment_lgtm: true
