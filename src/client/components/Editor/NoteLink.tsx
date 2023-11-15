@@ -18,13 +18,13 @@ const NoteLink: React.FC<NoteLinkProps> = ({ notes, uuid, handleNoteLinkClick })
 
   if (note && title)
     return (
-      <a data-testid={TestID.NOTE_LINK_SUCCESS} onClick={(e) => handleNoteLinkClick(e, note)}>
+      <a data-testid={TestID.NOTE_LINK_SUCCESS} onClick={(e) => handleNoteLinkClick(e, note)} target="_newtab">
         {title}
       </a>
     )
 
   return (
-    <span data-testid={TestID.NOTE_LINK_ERROR} className="error">
+    <span data-testid={TestID.NOTE_LINK_ERROR} className="error" href="#">
       {Errors.INVALID_LINKED_NOTE_ID}
     </span>
   )

@@ -38,7 +38,8 @@ export const PreviewEditor: React.FC<PreviewEditorProps> = ({ noteText, directio
   // ===========================================================================
 
   const handleNoteLinkClick = (e: React.SyntheticEvent, note: NoteItem) => {
-    e.preventDefault()
+    e.preventDefault();
+    e.stopPropagate();
 
     if (note) {
       _updateActiveNote(note.id, false)
@@ -47,7 +48,7 @@ export const PreviewEditor: React.FC<PreviewEditorProps> = ({ noteText, directio
 
       if (note?.favorite) return _swapFolder(Folder.FAVORITES)
       if (note?.scratchpad) return _swapFolder(Folder.SCRATCHPAD)
-      if (note?.trash) return _swapFolder(Folder.TRASH)
+      if (note.trash) return _swapFolder(Folder.TRASH)
 
       return _swapFolder(Folder.ALL)
     }
@@ -63,7 +64,7 @@ export const PreviewEditor: React.FC<PreviewEditorProps> = ({ noteText, directio
       renderers={{
         uuid: ({ value }) => returnNoteLink(value),
       }}
-      linkTarget="_blank"
+      linkTarget="_newtab"
       className={`previewer previewer_direction-${directionText}`}
       source={noteText}
     />
