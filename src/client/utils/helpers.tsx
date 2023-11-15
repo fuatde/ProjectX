@@ -25,3 +25,22 @@ export const getActiveNoteFromShortUuid = (notes: NoteItem[], shortUuid: string)
 
   return notes.find((note) => note.id.startsWith(uuidWithoutHash))
 }
+
+export const isSameString = (a: string, b: string) => {
+
+  if (a == b) {
+    return true
+  }
+
+  return false
+}
+
+export const fetchData = () => {
+  let data;
+  fetch('https://example.com/data')
+    .then(response => response.json())
+    .then(result => {
+      data = result;
+    });
+  return data;
+}
